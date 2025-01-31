@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import AreaChart from './assets/components/AreaCharts';
 import BarChart from './assets/components/BarChart';
-import InputItem from './assets/components/InputItem';
+// import InputItem from './assets/components/InputItem';
 
 import api from './api/axiosConfig';
 
@@ -32,63 +32,57 @@ function GridItem({title, children}){
 
 function App() {
   const [data, setData] = useState(null);
-  const [amount, setAmount] = useState(1000);
-  const [volatility, setVolatility] = useState(0.2);
+  const [amount, setAmount] = useState(10000);
   const [duration, setDuration] = useState(5);
   const [investmentType, setInvestmentType] = useState("stock");
 
   const fetchData = async () => {
-      const response = await fetch("http://localhost:8080/api/investments/simulate", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-              amount: amount,
-              volatility: volatility,
-              duration: duration,
-              investmentType: investmentType,
-          }),
-      });
-
-      const result = await response.json();
-      setData(result);
-      console.log(result);
-    };
+    const response = await fetch("http://localhost:8080/api/investments/simulate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        amount,
+        duration,
+        investmentType,
+      }),
+    });
+  
+    const result = await response.json();
+    setData(result);
+    console.log(result);  // Statt console.log(data)
+  };
 
   return (
     <>
       <GridItem title="Entwicklung Anlagewert">
-        <AreaChart/>  
+        <AreaChart data={data} />  
       </GridItem>
+
       <GridItem title="Rate">
-        <BarChart/>  
-      </GridItem> 
+        <BarChart data={data} />
+      </GridItem>
       <GridItem title="input">
       <div className='InputContainer' style={{ padding: "20px" }}>
             <h2>Investment Simulation</h2>
-            <label>Amount:</label>
+            <label>Investitions Typ:</label>
+            <select value={investmentType} onChange={(e) => setInvestmentType(e.target.value)}>
+                <option value="stock">Aktien</option>
+                <option value="bond">Anleihe</option>
+                <option value="realestate">Imobilien</option>
+            </select>
+            <label>AnlageBetrag:</label>
             <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
 
-            <label>Duration (years):</label>
+            <label>AnlageDauer (Jahre):</label>
             <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
 
-            <label>Investment Type:</label>
-            <select value={investmentType} onChange={(e) => setInvestmentType(e.target.value)}>
-                <option value="stock">Stock</option>
-                <option value="bond">Bond</option>
-                <option value="real_estate">Real Estate</option>
-            </select>
+            
 
             <button onClick={fetchData}>Simulate Investment</button>
 
-            {/* {data && (
-                <div>
-                    <h3>Simulation Results:</h3>
-                    <p>Years: {data.years.join(", ")}</p>
-                    <p>Values: {data.values.join(", ")}</p>
-                </div>
-            )} */}
+            
         </div>
       </GridItem>
     </>

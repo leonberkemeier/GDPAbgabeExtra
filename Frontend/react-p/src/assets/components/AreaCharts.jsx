@@ -50,10 +50,15 @@ const capitalInvestments =[
     }
 ]
 
-const AreaChartComponent = () => {
+const AreaChartComponent = ({data}) => {
+
+    if (!data) {
+        return <p style={{ color: "red" }}>"Es sind noch keine Daten verfügbar. Bitte geben Sie Ihre gewünschten Investitionsparameter ein und starten Sie die Simulation, um eine Prognose zu erhalten."</p>;
+      }
+
     return (
         <ResponsiveContainer height="100%" width="100%">
-            <AreaChart width={400} height={200} data={capitalInvestments}>
+            <AreaChart width={400} height={200} data={data}>
                 <YAxis dataKey="amount"/>
                 <XAxis dataKey='year'/>
                 <CartesianGrid strokeDasharray="2 2"/>

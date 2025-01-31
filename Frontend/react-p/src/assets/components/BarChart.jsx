@@ -50,10 +50,18 @@ const capitalInvestments =[
     }
 ]
 
-const BarChartComponent = () => {
+
+const BarChartComponent = ({data}) => {
+    // if (!data || !data.amount || !data.rates){
+    //     return <p>Please use a select</p>
+    // }
+    
+    if (!data) {
+        return <p style={{ color: "red" }}>"Es sind noch keine Daten verfügbar. Bitte geben Sie Ihre gewünschten Investitionsparameter ein und starten Sie die Simulation, um eine Prognose zu erhalten."</p>;
+      }
     return (
         <ResponsiveContainer height="100%" width="100%">
-            <BarChart width={400} height={200} data={capitalInvestments}>
+            <BarChart width={400} height={200} data={data}>
                 <YAxis dataKey="rate"/>
                 <XAxis dataKey='year'/>
                 <CartesianGrid strokeDasharray="2 2"/>
