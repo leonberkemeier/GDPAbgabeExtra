@@ -58,7 +58,7 @@ function InvestmentTool(){
     
     
     const fetchData = async () => {
-        const response = await fetch("http://localhost:8080/api/investments/simulate", {
+        const response = await fetch("https://invest.leonberkemeier.de/api/investments/simulate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
