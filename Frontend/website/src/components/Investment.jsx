@@ -81,7 +81,7 @@ function InvestmentTool(){
         <section id="invest">
             <h1>Invest with us!</h1>
             <br />
-            <Container>
+            <Container className="Grid-Container">
             <GridItem title="Entwicklung Anlagewert">
             <AreaChart data={data} />  
             </GridItem>

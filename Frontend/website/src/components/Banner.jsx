@@ -9,7 +9,7 @@ function BannerExample(){
     return(
         <section id='home' className='banner'>
             <Container>
-                <Row className="align-items-center">
+                <Row className="Row-Container">
                     <Col>
                         <h1><TypingEffect /></h1>
                         <br />
