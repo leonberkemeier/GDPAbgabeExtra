@@ -283,3 +283,17 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 #invest h1{
   color: white;
 }
+.FinalAmount h2{
+  margin: 10px;
+  padding: 10px;
+  /* height: 500px; */
+  /* width: 500px; */
+  border-radius: 15px;
+  overflow: hidden;
+  background: rgba(68, 71, 101, 0.41);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
