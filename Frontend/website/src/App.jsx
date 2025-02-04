@@ -8,6 +8,8 @@ import Investment from './components/Investment';
 
 
 
+
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -16,6 +18,7 @@ function App() {
       <NavBar/>
       <Banner/>
       <Investment/>
+      
     </div>
     
   )

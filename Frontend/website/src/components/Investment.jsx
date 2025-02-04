@@ -15,12 +15,47 @@ function GridItem({title, children}){
     )
   }
 
+function FinalAmount({data, amount}){
+  if (data && data.length > 0) {
+      console.log(data);
+      const lastItem = data.at(-1);
+      const LastAmount = lastItem.amount.toFixed(2);
+      const LastYear = lastItem.year+1;
+      
+      if(LastAmount > amount){
+        return(<>
+          <h2>Endkapital nach {LastYear} Jahren : <p style={{ color: "green" }}>{LastAmount} EUR</p>, bei einem Investment von <p style={{color:"white"}}>{amount} EUR </p></h2>
+          <br />
+          </>
+        )
+      
+      } else{
+        return(
+          <h2>Endkapital nach {LastYear} Jahren : <p style={{ color: "red" }}>{LastAmount} EUR</p>, bei einem Investment von <p style={{color:"white"}}>{amount} EUR </p></h2>
+          
+        )
+      }
+
+      
+      
+      
+  } else {
+      console.log("Daten sind nicht vorhanden");
+      return(
+        <p style={{ color: "white" }}>"Es sind noch keine Daten verfügbar. Bitte geben Sie Ihre gewünschten Investitionsparameter ein und starten Sie die Simulation, um eine Prognose zu erhalten."</p>
+      )
+  }
+  
+};
+
 function InvestmentTool(){
 
     const [data, setData] = useState(null);
     const [amount, setAmount] = useState(10000);
     const [duration, setDuration] = useState(12);
     const [investmentType, setInvestmentType] = useState("stock");
+
+    
     
     const fetchData = async () => {
         const response = await fetch("http://localhost:8080/api/investments/simulate", {
@@ -37,9 +72,11 @@ function InvestmentTool(){
         const result = await response.json();
         setData(result);
         console.log(result);  // Statt console.log(data)
+        
+
     };
     
-
+    // console.log(lastItem);
     return (
         <section id="invest">
             <h1>Invest with us!</h1>
@@ -71,7 +108,10 @@ function InvestmentTool(){
               </div>
             </GridItem>  
             </Container>
-            
+            <br />
+            <Container>
+               <FinalAmount amount={amount} data={data}/>
+            </Container>
         </section>
     )
 }
