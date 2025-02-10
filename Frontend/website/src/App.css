@@ -360,6 +360,20 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   max-width: 600px;
   color: white;
   margin-top: 150px;
+  background: green;
+  padding: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: rgba(68, 71, 101, 0.41);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8.9px);
+-webkit-backdrop-filter: blur(8.9px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.content .info-content p{
+  text-align: justify;
 }
 
 .content .info-content p{
