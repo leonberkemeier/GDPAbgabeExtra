@@ -448,6 +448,15 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   .jamieimgcontainer img{
     margin-right: 20px;
   }
+  .compare .inputcontainer{
+    width: 100%;
+  }
+  .compare .chartContainer{
+    width: 100%;
+  }
+  #invest .compare .container{
+    margin: 0;
+  }
 } 
 
 @media screen and (max-width:450px){
