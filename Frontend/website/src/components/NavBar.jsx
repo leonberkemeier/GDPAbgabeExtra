@@ -11,20 +11,13 @@ function CollapsibleExample() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">Simuliere</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Investiere" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Aktien</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Anleihen
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Imobilien</NavDropdown.Item>
-              
-            </NavDropdown>
+            <Nav.Link href="#invest">Simuliere</Nav.Link>
+            <Nav.Link href="#about">About</Nav.Link>
+
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
+            <Nav.Link href="https://github.com/leonberkemeier/GDPAbgabeExtra">code .</Nav.Link>
+            <Nav.Link eventKey={2} href="https://www.instagram.com/leonberkemeier/">
               Dank memes
             </Nav.Link>
           </Nav>

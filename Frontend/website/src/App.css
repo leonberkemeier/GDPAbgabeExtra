@@ -69,6 +69,9 @@ nav.navbar .navbar-nav a.nav-link.navbar-link:hover,
 nav.navbar .navbar-nav a.nav-link.navbar-link.active {
     opacity: 1;
 }
+.navbar-nav .nav-link.active{
+  color:#75598a;
+}
 span.navbar-text {
     display: flex;
     align-items: center;
@@ -199,6 +202,7 @@ nav.navbar a{
   width: 100%;
 }
 
+
 .imgcontainer img{
   object-fit: cover;
   height: 100%;
@@ -209,7 +213,7 @@ nav.navbar a{
 }
 .col button{
   margin-top: 40px;
- 
+  width: 200px;
   background-color: #715f91;
   border-radius: 5px;
 }
@@ -221,9 +225,11 @@ nav.navbar a{
   display: flex;
   flex-direction: column;
   height: 100vh;
+  justify-content: start;
+  padding-top: 100px;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #282e2d;
 }
 button:focus,
 button:focus-visible {
@@ -277,8 +283,14 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   width: 50%;
 }
 .InputContainer button{
-  background-color: rgb(68, 124, 68);
+  background-color: #00aa95;
+  color: black;
+  border-radius: 5px ;
   margin-top: 20px;
+  width: 130px;
+}
+.InputContainer button:hover{
+  background-color: rgba(0,238,209,255);
 }
 
 #invest .container{
@@ -287,6 +299,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 }
 #invest h1{
   color: white;
+  text-align: center;
 }
 .FinalAmount h2{
   margin: 10px;
@@ -303,6 +316,72 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* Invest */
+
+.content .info-content{
+  width: 80vw;
+  max-width: 600px;
+  color: white;
+  margin-top: 150px;
+}
+
+.content .info-content p{
+  font-size: 20px;
+  margin: 15px;
+}
+
+
+
+/* about */
+
+
+
+#about{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  padding-top: 100px;
+}
+#about h1,h2{
+  text-align: left;
+}
+
+#about p{
+  color: white;
+}
+#about .about{
+  margin: 40px;
+  width: 50vw;
+  text-align: justify;
+  max-width: 800px;
+}
+#about .about p{
+  text-align: justify;
+}
+#about .jamie{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+  width: 50vw;
+  max-width: 800px;
+}
+
+.jamieimgcontainer img{
+  object-fit: cover;
+  height:200px;
+  width: 200px;
+  border-radius: 50%;
+  margin-right: 150px;
+}
+#about .jamie .thanks{
+  width: 40vw;
+  margin-top: 30px;
+  max-width: 600px;
+}
 
 /* rsponsive */
 
@@ -318,6 +397,24 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     width: 90vw;
   }
   #invest{
-    height: 240vh;
+    height: 200vh;
+  }
+  #about .about{
+    width: 80%;
+  }
+  #about .jamie{
+    width: 75%;
+  }
+  #about .jamie .thanks{
+    width: 60vw;
+  }
+  .jamieimgcontainer img{
+    margin-right: 20px;
+  }
+} 
+
+@media screen and (max-width:450px){
+  #about .jamie{
+    flex-direction: column;
   }
 }

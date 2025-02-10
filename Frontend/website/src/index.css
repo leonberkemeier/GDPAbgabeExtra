@@ -45,13 +45,21 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  width: 100px;
 }
-button:hover {
-  border-color: #646cff;
+menu button{
+  margin: 10px;
+  border-radius: 5px;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+menu button.active{
+  border-bottom: 1px solid white;
+  transition: 1s linear;
+  
 }
 
 @media (prefers-color-scheme: light) {
@@ -65,4 +73,8 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+#about h1{
+  color: white;
 }

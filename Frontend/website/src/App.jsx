@@ -4,6 +4,9 @@ import './App.css'
 import NavBar from './components/NavBar';
 import Banner from './components/Banner';
 import Investment from './components/Investment';
+import Invest from './components/Invest';
+import About from './components/About';
+
 
 
 
@@ -17,8 +20,8 @@ function App() {
     <div className='App'>
       <NavBar/>
       <Banner/>
-      <Investment/>
-      
+      <Invest/>
+      <About/>
     </div>
     
   )

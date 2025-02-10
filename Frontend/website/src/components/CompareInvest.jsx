@@ -1,6 +1,6 @@
 import Container from "react-bootstrap/esm/Container";
 import AreaChart from './AreaChart';
-import BarChart from './BarChart';
+import LineChart from './LineChart';
 import TabButton from "./TabButton";
 
 import { useState, useEffect } from 'react';
@@ -14,7 +14,20 @@ function GridItem({title, children}){
         </div>
       </div>
     )
-  }
+}
+
+//Endpunkt bietet falsched Datenformat (lange dran gesessen) -> neues Format
+const transformData = (data) => {
+    if (!data || data.length !== 3) return [];
+
+    return data[0].map((_, index) => ({
+        year: data[0][index].year,
+        stock: data[0][index].amount,      
+        bond: data[1][index].amount,        
+        real_estate: data[2][index].amount  
+    }));
+};
+
 
 function FinalAmount({data, amount}){
   if (data && data.length > 0) {
@@ -35,11 +48,7 @@ function FinalAmount({data, amount}){
           <h2>Endkapital nach {LastYear} Jahren : <p style={{ color: "red" }}>{LastAmount} EUR</p> bei einem Investment von <p style={{color:"white"}}>{amount} EUR </p></h2>
           
         )
-      }
-
-      
-      
-      
+      } 
   } else {
       console.log("Daten sind nicht vorhanden");
       return(
@@ -49,6 +58,7 @@ function FinalAmount({data, amount}){
   
 };
 
+
 function InvestmentTool(){
 
     const [data, setData] = useState(null);
@@ -56,26 +66,66 @@ function InvestmentTool(){
     const [duration, setDuration] = useState(10);
     const [investmentType, setInvestmentType] = useState("stock");
 
-    const fetchData = async () => {
-        const response = await fetch("https://invest.leonberkemeier.de/api/investments/simulate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            amount,
-            duration,
-            investmentType,
-          }),
-        });
-        const result = await response.json();
-        setData(result);
-        console.log(result);  // Statt console.log(data)
+    function FinalAmount({data, amount}){
+        if (data && data.length > 0) {
+            console.log(data);
+            const lastItem = data.at(-1);
+            const LastAmount = lastItem.amount.toFixed(2);
+            const LastYear = lastItem.year+1;
+            
+            if(LastAmount > amount){
+              return(<>
+                <h2>Endkapital nach {LastYear} Jahren : <p style={{ color: "green" }}>{LastAmount} EUR</p> bei einem Investment von <p style={{color:"white"}}>{amount} EUR </p></h2>
+                <br />
+                </>
+              )
+            
+            } else{
+              return(
+                <h2>Endkapital nach {LastYear} Jahren : <p style={{ color: "red" }}>{LastAmount} EUR</p> bei einem Investment von <p style={{color:"white"}}>{amount} EUR </p></h2>
+                
+              )
+            }
+      
+            
+            
+            
+        } else {
+            console.log("Daten sind nicht vorhanden");
+            return(
+              <p style={{ color: "white" }}>"Es sind noch keine Daten verfügbar. Bitte geben Sie Ihre gewünschten Investitionsparameter ein und starten Sie die Simulation, um eine Prognose zu erhalten."</p>
+            )
+        }
         
+      };
 
+    const fetchAllData = async () => {
+        const investmentTypes = ["stock", "bond", "realestate"];
+    
+        try {
+            const responses = await Promise.all(
+                investmentTypes.map((type) =>
+                    fetch("http://localhost:8080/api/investments/simulate", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            amount,
+                            duration,
+                            investmentType: type, 
+                        }),
+                    }).then((res) => res.json())
+                )
+            );
+    
+            setData(responses);
+            console.log(responses); 
+        } catch (error) {
+            console.error("Fehler beim Abrufen der Daten:", error);
+        }
     };
     
-   
+    const chartData = transformData(data);
+    console.log(chartData);
     // console.log(lastItem);
     return (
       <>
@@ -84,12 +134,10 @@ function InvestmentTool(){
             <br />
             <Container className="Grid-Container">
             <GridItem title="Entwicklung Anlagewert">
-            <AreaChart data={data} />  
+                <LineChart data={chartData}></LineChart>  
             </GridItem>
 
-            <GridItem title="Rate">
-              <BarChart data={data} />
-            </GridItem>
+            
             <GridItem title="Input">
               <div className='InputContainer' style={{ padding: "20px" }}>
                   <h2>Investment Simulation</h2>
@@ -105,14 +153,12 @@ function InvestmentTool(){
                   <label>AnlageDauer (Jahre):</label>
                   <input type="number" value={duration} onChange={(e) => setDuration(e.target.value)} />
 
-                  <button onClick={fetchData}>Simulate Investment</button>
+                  <button onClick={fetchAllData}>Simulate Investment</button>
               </div>
             </GridItem>  
             </Container>
             <br />
-            <Container className="FinalAmount">
-               <FinalAmount amount={amount} data={data}/>
-            </Container>
+           
         
         </div>
 

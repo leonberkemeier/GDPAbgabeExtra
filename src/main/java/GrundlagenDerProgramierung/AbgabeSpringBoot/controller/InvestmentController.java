@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/investments")
-@CrossOrigin(origins = {"http://localhost:8080", "https://invest.leonberkemeier.de"}) // Erlaubt Anfragen vom React-Vite-Frontend
+@CrossOrigin(origins = {"http://localhost:8080", "https://invest.leonberkemeier.de","http://localhost:5173"}) // Erlaubt Anfragen vom React-Vite-Frontend
 public class InvestmentController{
 	
 	private final InvestmentService investmentService;
