@@ -5,16 +5,6 @@ import TabButton from "./TabButton";
 
 import { useState, useEffect } from 'react';
 
-function GridItem({title, children}){
-    return(
-      <div className="GridItemDiv">
-        <h3>{title}</h3>
-        <div className="GridItem">
-          {children}
-        </div>
-      </div>
-    )
-}
 
 //Endpunkt bietet falsched Datenformat (lange dran gesessen) -> neues Format
 const transformData = (data) => {
@@ -105,7 +95,7 @@ function InvestmentTool(){
         try {
             const responses = await Promise.all(
                 investmentTypes.map((type) =>
-                    fetch("http://localhost:8080/api/investments/simulate", {
+                    fetch("https://invest.leonberkemeier.de/api/investments/simulate", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
@@ -129,24 +119,22 @@ function InvestmentTool(){
     // console.log(lastItem);
     return (
       <>
-        <div className="content">
+        <div className="compare">
             <h1>Invest with us!</h1>
             <br />
             <Container className="Grid-Container">
-            <GridItem title="Entwicklung Anlagewert">
-                <LineChart data={chartData}></LineChart>  
-            </GridItem>
-
-            
-            <GridItem title="Input">
+            <div className="chartContainer">
+              <h3>Entwicklung Anlageklassen</h3>
+              <div className="chartItem">
+              <LineChart data={chartData}></LineChart> 
+              </div>
+            </div>
+            <div className="inputcontainer">
+            <h3>Vergleiche die Anlageklassen</h3>
               <div className='InputContainer' style={{ padding: "20px" }}>
-                  <h2>Investment Simulation</h2>
-                  <label>Investitions Typ:</label>
-                  <select value={investmentType} onChange={(e) => setInvestmentType(e.target.value)}>
-                      <option value="stock">Aktien</option>
-                      <option value="bond">Anleihe</option>
-                      <option value="realestate">Imobilien</option>
-                  </select>
+              
+                  
+                  
                   <label>AnlageBetrag:</label>
                   <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
 
@@ -155,15 +143,17 @@ function InvestmentTool(){
 
                   <button onClick={fetchAllData}>Simulate Investment</button>
               </div>
-            </GridItem>  
-            </Container>
-            <br />
-           
+            </div>
+            
+            
+            </Container>   
         
         </div>
 
         </>
     )
 }
+  
+
 
 export default InvestmentTool;

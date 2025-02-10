@@ -228,6 +228,43 @@ nav.navbar a{
   justify-content: start;
   padding-top: 100px;
 }
+#invest .compare{
+  width: 100%;
+}
+#invest .compare .container{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.compare .inputcontainer{
+  margin: 10px;
+  padding: 10px;
+  height: 500px;
+  width: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: rgba(68, 71, 101, 0.41);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+.compare .chartContainer{
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  height: 500px;
+  width: 600px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: rgba(68, 71, 101, 0.41);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.9px);
+  -webkit-backdrop-filter: blur(8.9px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
 button:hover {
   background-color: #282e2d;
 }
